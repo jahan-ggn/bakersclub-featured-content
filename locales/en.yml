@@ -1,0 +1,6 @@
+en:
+  theme_metadata:
+    description: Adds a configurable featured content section to the BakersClub homepage
+      for highlighting articles, guides, and other external content.
+    settings:
+      example_setting: A description of a setting.
