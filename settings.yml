@@ -1,2 +1,23 @@
-example_setting:
-  default: true
+section_title:
+  type: string
+  default: "Featured Content"
+
+featured_items:
+  type: objects
+  default: []
+  schema:
+    name: featured_item
+    properties:
+      title:
+        type: string
+        required: true
+
+      url:
+        type: string
+        required: true
+        validations:
+          url: true
+
+      image:
+        type: upload
+        required: true

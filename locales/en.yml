@@ -1,6 +1,12 @@
 en:
   theme_metadata:
-    description: Adds a configurable featured content section to the BakersClub homepage
+    description:
+      Adds a configurable featured content section to the BakersClub homepage
       for highlighting articles, guides, and other external content.
     settings:
-      example_setting: A description of a setting.
+      section_title:
+        label: "Section Title"
+        description: "The title displayed above the featured content section."
+      featured_items:
+        label: "Featured Items"
+        description: "A list of items to feature in the section. Each item requires a title, URL, and image."

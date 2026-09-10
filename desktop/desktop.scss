@@ -1,0 +1,10 @@
+.bakersclub-featured-content {
+  &__items {
+    justify-content: flex-start;
+  }
+
+  &__item {
+    flex: 0 1 calc(33.333% - 1em);
+    max-width: 500px;
+  }
+}

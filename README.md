@@ -2,4 +2,6 @@
 
 **Theme Summary**
 
-For more information, please see: **url to meta topic**
+A Discourse theme component that adds a configurable featured content section to the BakersClub homepage.
+
+Admins can add featured articles or external content with a title, URL, and image through the theme settings.
