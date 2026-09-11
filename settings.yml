@@ -11,13 +11,14 @@ featured_items:
       title:
         type: string
         required: true
-
       url:
         type: string
         required: true
         validations:
           url: true
-
       image:
         type: upload
         required: true
+      label:
+        type: string
+        required: false

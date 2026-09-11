@@ -63,7 +63,13 @@ export default class BakersClubFeaturedContent extends Component {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img src={{item.image}} alt="" />
+                    <img src={{item.image}} alt={{item.title}} />
+
+                    {{#if item.label}}
+                      <span class="bakersclub-featured-content__label">
+                        {{item.label}}
+                      </span>
+                    {{/if}}
                   </a>
 
                   <h3 class="bakersclub-featured-content__item-title">

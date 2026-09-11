@@ -44,6 +44,7 @@
   }
 
   &__image {
+    position: relative;
     display: block;
     width: 100%;
     max-width: 450px;
@@ -56,6 +57,18 @@
       object-fit: cover;
       object-position: center;
     }
+  }
+
+  &__label {
+    position: absolute;
+    left: -0.5em;
+    bottom: 1em;
+    z-index: 1;
+    padding: 0.4em 0.65em;
+    background: var(--secondary);
+    color: var(--primary);
+    font-weight: 700;
+    line-height: 1.2;
   }
 
   &__item-title {

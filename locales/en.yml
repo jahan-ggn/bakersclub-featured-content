@@ -4,7 +4,6 @@ en:
 
     settings:
       section_title: "The title displayed above the featured content section."
-
       featured_items:
         description: "A list of items to feature in the section. Each item requires a title, URL, and image."
         schema:
@@ -15,3 +14,5 @@ en:
               description: "The external URL opened when the featured item is clicked."
             image:
               description: "The image displayed for this featured item."
+            label:
+              description: "An optional label displayed over the image for this featured item."
