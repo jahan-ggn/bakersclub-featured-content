@@ -1,6 +1,17 @@
-section_title:
-  type: string
-  default: "Featured Content"
+featured_sections:
+  type: objects
+  default: []
+  schema:
+    name: featured_section
+    properties:
+      section_id:
+        type: string
+        required: true
+      title:
+        type: string
+        required: true
+      allowed_groups:
+        type: groups
 
 featured_items:
   type: objects
@@ -8,6 +19,9 @@ featured_items:
   schema:
     name: featured_item
     properties:
+      section_id:
+        type: string
+        required: true
       title:
         type: string
         required: true
@@ -21,4 +35,3 @@ featured_items:
         required: true
       label:
         type: string
-        required: false

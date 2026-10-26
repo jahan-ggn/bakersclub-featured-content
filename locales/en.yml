@@ -1,18 +1,38 @@
 en:
   theme_metadata:
-    description: "Adds a configurable featured content section to the BakersClub homepage for highlighting articles, guides, and other external content."
+    description: "Adds configurable featured content sections to the BakersClub homepage, with separate cards and group visibility."
 
     settings:
-      section_title: "The title displayed above the featured content section."
-      featured_items:
-        description: "A list of items to feature in the section. Each item requires a title, URL, and image."
+      featured_sections:
+        description: "Create and reorder homepage sections. Each section ID must be unique."
         schema:
           properties:
+            section_id:
+              label: "Section ID"
+              description: "A unique identifier, such as featured or members-only. Use this same ID on the cards belonging to this section. Keep it unchanged to preserve collapse preferences."
             title:
-              description: "The title displayed for this featured item."
+              label: "Section title"
+              description: "The heading displayed above this section."
+            allowed_groups:
+              label: "Allowed groups"
+              description: "Leave empty to show this section to everyone. Select groups to show it only to members of at least one selected group. Include staff if they should also have access."
+
+      featured_items:
+        description: "Create and reorder featured cards. Each card belongs to the section matching its Section ID."
+        schema:
+          properties:
+            section_id:
+              label: "Section ID"
+              description: "Enter the exact Section ID configured under featured_sections."
+            title:
+              label: "Title"
+              description: "The title displayed below the card image."
             url:
-              description: "The external URL opened when the featured item is clicked."
+              label: "URL"
+              description: "The URL opened when the card is clicked."
             image:
-              description: "The image displayed for this featured item."
+              label: "Image"
+              description: "The image displayed on this card."
             label:
-              description: "An optional label displayed over the image for this featured item."
+              label: "Label"
+              description: "An optional label displayed over the image."

@@ -2,6 +2,6 @@
 
 ## Theme Summary
 
-A Discourse theme component that adds a configurable featured content section to the BakersClub homepage.
+A Discourse theme component that adds multiple configurable featured content sections to the BakersClub homepage, with group visibility and independent collapse controls.
 
-Admins can add featured articles or external content with a title, URL, image, and optional image label through the theme settings.
+Admins can configure sections and assign cards with a title, URL, image, and optional image label through the theme settings.

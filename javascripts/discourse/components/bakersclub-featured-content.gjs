@@ -1,94 +1,46 @@
 import Component from "@glimmer/component";
-import { tracked } from "@glimmer/tracking";
-import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { defaultHomepage } from "discourse/lib/utilities";
-import DButton from "discourse/ui-kit/d-button";
-import icon from "discourse/ui-kit/helpers/d-icon";
+import BakersClubFeaturedSection from "./bakersclub-featured-section";
 
 export default class BakersClubFeaturedContent extends Component {
+  @service currentUser;
   @service router;
-  @service keyValueStore;
-
-  @tracked
-  isCollapsed =
-    this.keyValueStore.getItem("bakersclubFeaturedContentCollapsed") === "true";
 
   get shouldShow() {
     return this.router.currentRouteName === `discovery.${defaultHomepage()}`;
   }
 
-  get featuredItems() {
-    return settings.featured_items || [];
-  }
+  get sections() {
+    const sections = settings.featured_sections || [];
+    const items = settings.featured_items || [];
 
-  @action
-  toggleContent() {
-    this.isCollapsed = !this.isCollapsed;
-
-    this.keyValueStore.setItem(
-      "bakersclubFeaturedContentCollapsed",
-      this.isCollapsed
+    const userGroupIds = new Set(
+      (this.currentUser?.groups || []).map((group) => Number(group.id))
     );
+
+    return sections
+      .filter((section) => {
+        const allowedGroups = section.allowed_groups || [];
+
+        return (
+          allowedGroups.length === 0 ||
+          allowedGroups.some((groupId) => userGroupIds.has(Number(groupId)))
+        );
+      })
+      .map((section) => ({
+        id: section.section_id,
+        title: section.title,
+        items: items.filter((item) => item.section_id === section.section_id),
+      }))
+      .filter((section) => section.items.length > 0);
   }
 
   <template>
     {{#if this.shouldShow}}
-      {{#if this.featuredItems.length}}
-        <div
-          class="bakersclub-featured-content
-            {{unless this.isCollapsed 'is-open'}}"
-        >
-
-          <DButton
-            class="bakersclub-featured-content__toggle"
-            @action={{this.toggleContent}}
-            @translatedLabel={{settings.section_title}}
-          >
-            {{#if this.isCollapsed}}
-              {{icon "angle-right"}}
-            {{else}}
-              {{icon "angle-down"}}
-            {{/if}}
-          </DButton>
-
-          {{#unless this.isCollapsed}}
-            <div class="bakersclub-featured-content__items">
-              {{#each this.featuredItems as |item|}}
-                <article class="bakersclub-featured-content__item">
-
-                  <a
-                    class="bakersclub-featured-content__image"
-                    href={{item.url}}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img src={{item.image}} alt={{item.title}} />
-
-                    {{#if item.label}}
-                      <span class="bakersclub-featured-content__label">
-                        {{item.label}}
-                      </span>
-                    {{/if}}
-                  </a>
-
-                  <h3 class="bakersclub-featured-content__item-title">
-                    <a
-                      href={{item.url}}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {{item.title}}
-                    </a>
-                  </h3>
-
-                </article>
-              {{/each}}
-            </div>
-          {{/unless}}
-
-        </div>
-      {{/if}}
+      {{#each this.sections key="id" as |section|}}
+        <BakersClubFeaturedSection @section={{section}} />
+      {{/each}}
     {{/if}}
   </template>
 }
